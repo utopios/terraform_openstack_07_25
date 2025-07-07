@@ -59,4 +59,16 @@ variable "student" {
     courses = list(string)
     grades = map(number) 
   })
+
+  default = {
+    first_name = "value"
+    last_name = "value"
+    age = 20
+    is_student = true
+    courses = ["Math", "Science"]   
+    grades = {
+      "Math" = 90,
+      "Science" = 90
+    }
+  }
 }
