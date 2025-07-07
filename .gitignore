@@ -1,1 +1,4 @@
 ORSYS-CV-ouverture-inter.pdf
+**/.terraform/*
+.terraform
+.terraform/*
