@@ -8,3 +8,6 @@
     - Un volume de stockage dédié attaché à chaque VM.
 	- Le même réseau partagé entre les trois VMs.
 	- La même clé SSH pour l’accès à toutes les VMs.
+
+
+## Exercice : Convertir Exercice 3VMs en plusieurs modules
