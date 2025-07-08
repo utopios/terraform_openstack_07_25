@@ -47,15 +47,9 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
   ip_version = 4
 }
 
-resource "openstack_images_image_v2" "rancheros" {
-  name             = "RancherOS"
-  image_source_url = "https://releases.rancher.com/os/latest/rancheros-openstack.img"
-  container_format = "bare"
-  disk_format      = "qcow2"
-
-  properties = {
-    key = "value"
-  }
+data "openstack_images_image_v2" "ubuntu" {
+  name        = var.image_name
+  most_recent = true
 }
 
 resource "openstack_compute_flavor_v2" "test-flavor" {
@@ -76,7 +70,7 @@ resource "openstack_compute_keypair_v2" "test-keypair" {
 
 resource "openstack_compute_instance_v2" "example" {
   name = "example-instance"
-  image_id = openstack_images_image_v2.rancheros.id
+  image_id = openstack_images_image_v2.ubuntu.id
   flavor_id = openstack_compute_flavor_v2.test-flavor.id
   key_pair = openstack_compute_keypair_v2.test-keypair.name
   security_groups = ["default", "example_security_group"]
