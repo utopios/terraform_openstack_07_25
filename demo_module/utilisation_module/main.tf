@@ -18,7 +18,7 @@ module "simple_module" {
 }
 
 module "network" {
-  source = "../network_module"
+  source = "git::https://github.com/utopios/terraform_network_module.git"
   network_name = "dev-network"
   subnet_name = "dev-subnet"
   cidr = "10.0.1.0/24"
