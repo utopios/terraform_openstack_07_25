@@ -183,6 +183,19 @@ resource "openstack_compute_instance_v2" "vms" {
   network {
     uuid = openstack_networking_network_v2.private_network.id
   }
+
+  provisioner "remote-exec" {
+    inline = [ "apt update" ]
+  }
+
+  provisioner "local-exec" {
+    command = "echo Machine créée"
+  }
+
+  provisioner "file" {
+    source = "file.txt"
+    destination = "file.txt"
+  }
   
   user_data = base64encode(<<-EOF
     #!/bin/bash
