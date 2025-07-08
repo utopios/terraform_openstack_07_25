@@ -19,7 +19,7 @@ output "volumes_ids" {
 
 output "volumes_details" {
   description = "Détails complets des volumes"
-  value = openstack_blockstorage_volume_v3.volumes
+  value       = openstack_blockstorage_volume_v3.volumes
 }
 
 output "total_storage_size" {

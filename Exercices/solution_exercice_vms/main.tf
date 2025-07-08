@@ -174,7 +174,7 @@ resource "openstack_blockstorage_volume_v3" "volumes" {
 resource "openstack_compute_instance_v2" "vms" {
   count = var.vm_count
   
-  name            = "${var.project_name}-vm-${count.index + 1}"
+  name            = "${terraform.workspace}-${var.project_name}-vm-${count.index + 1}"
   image_id        = openstack_images_image_v2.ubuntu_image.id
   flavor_id       = openstack_compute_flavor_v2.custom_flavor.id
   key_pair        = openstack_compute_keypair_v2.ssh_keypair.name
@@ -210,6 +210,11 @@ resource "openstack_compute_instance_v2" "vms" {
   EOF
   )
   
+  tags = {
+    name = "${terraform.workspace}-vm-${count.index}"
+    env = terraform.workspace
+  }
+
   depends_on = [
     openstack_networking_subnet_v2.private_subnet,
     #openstack_networking_router_interface_v2.router_interface

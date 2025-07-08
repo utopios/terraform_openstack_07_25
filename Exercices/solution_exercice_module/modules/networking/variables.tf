@@ -11,11 +11,11 @@ variable "environment" {
 variable "network_config" {
   description = "Configuration réseau"
   type = object({
-    cidr                = string
-    dns_servers         = list(string)
-    allocation_start    = string
-    allocation_end      = string
-    external_network    = string
+    cidr             = string
+    dns_servers      = list(string)
+    allocation_start = string
+    allocation_end   = string
+    external_network = string
   })
 }
 

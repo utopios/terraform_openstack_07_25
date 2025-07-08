@@ -18,5 +18,5 @@ output "images_ids" {
 
 output "images_details" {
   description = "Détails complets des images"
-  value = openstack_images_image_v2.images
+  value       = openstack_images_image_v2.images
 }

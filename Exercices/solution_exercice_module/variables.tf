@@ -8,7 +8,7 @@ variable "environment" {
   description = "Environnement de déploiement"
   type        = string
   default     = "dev"
-  
+
   validation {
     condition     = contains(["dev", "staging", "prod"], var.environment)
     error_message = "L'environnement doit être 'dev', 'staging' ou 'prod'."
@@ -28,11 +28,11 @@ variable "common_tags" {
 variable "network_config" {
   description = "Configuration réseau"
   type = object({
-    cidr                = string
-    dns_servers         = list(string)
-    allocation_start    = string
-    allocation_end      = string
-    external_network    = string
+    cidr             = string
+    dns_servers      = list(string)
+    allocation_start = string
+    allocation_end   = string
+    external_network = string
   })
   default = {
     cidr             = "10.0.1.0/24"
@@ -200,53 +200,53 @@ variable "ssh_keys_config" {
 variable "vm_configurations" {
   description = "Configuration spécifique de chaque VM"
   type = map(object({
-    image_key           = string
-    flavor_key          = string
-    ssh_key             = string
-    volume_size         = number
-    volume_type         = string
-    assign_floating_ip  = bool
-    user_data_template  = string
-    packages            = list(string)
-    services            = list(string)
-    custom_ports        = list(number)
+    image_key          = string
+    flavor_key         = string
+    ssh_key            = string
+    volume_size        = number
+    volume_type        = string
+    assign_floating_ip = bool
+    user_data_template = string
+    packages           = list(string)
+    services           = list(string)
+    custom_ports       = list(number)
   }))
   default = {
     frontend = {
       image_key          = "ubuntu22"
       flavor_key         = "small"
-      ssh_key           = "production"
+      ssh_key            = "production"
       volume_size        = 30
       volume_type        = "standard"
       assign_floating_ip = true
       user_data_template = "web_server"
-      packages          = ["nginx", "htop", "curl"]
-      services          = ["nginx"]
-      custom_ports      = [8080, 8443]
+      packages           = ["nginx", "htop", "curl"]
+      services           = ["nginx"]
+      custom_ports       = [8080, 8443]
     },
     backend = {
       image_key          = "ubuntu20"
       flavor_key         = "medium"
-      ssh_key           = "production"
+      ssh_key            = "production"
       volume_size        = 50
       volume_type        = "standard"
       assign_floating_ip = true
       user_data_template = "app_server"
-      packages          = ["docker.io", "nodejs", "npm"]
-      services          = ["docker"]
-      custom_ports      = [3000, 5000]
+      packages           = ["docker.io", "nodejs", "npm"]
+      services           = ["docker"]
+      custom_ports       = [3000, 5000]
     },
     database = {
       image_key          = "centos8"
       flavor_key         = "medium"
-      ssh_key           = "production"
+      ssh_key            = "production"
       volume_size        = 100
       volume_type        = "standard"
       assign_floating_ip = false
       user_data_template = "database"
-      packages          = ["postgresql-server"]
-      services          = ["postgresql"]
-      custom_ports      = [5432]
+      packages           = ["postgresql-server"]
+      services           = ["postgresql"]
+      custom_ports       = [5432]
     }
   }
 }

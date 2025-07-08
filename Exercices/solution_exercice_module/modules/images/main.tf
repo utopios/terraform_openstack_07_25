@@ -13,7 +13,7 @@ locals {
 
 resource "openstack_images_image_v2" "images" {
   for_each = var.images_config
-  
+
   name             = "${local.resource_prefix}-${each.key}"
   image_source_url = each.value.source_url
   container_format = each.value.container_format
@@ -21,8 +21,8 @@ resource "openstack_images_image_v2" "images" {
   min_disk_gb      = each.value.min_disk
   min_ram_mb       = each.value.min_ram
   web_download     = true
-  verify_checksum  = true
-  
+  #verify_checksum  = true
+
   properties = merge(
     each.value.properties,
     var.common_tags,
@@ -31,7 +31,7 @@ resource "openstack_images_image_v2" "images" {
       created_by = "terraform-module-images"
     }
   )
-  
+
   tags = [
     "${var.project_name}:${var.environment}",
     "module:images",

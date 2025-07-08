@@ -3,11 +3,11 @@ output "deployment_summary" {
   value = {
     project_name       = var.project_name
     environment        = var.environment
-    total_vms         = length(var.vm_configurations)
-    total_images      = length(var.images_config)
-    total_flavors     = length(var.flavors_config)
-    total_ssh_keys    = length(var.ssh_keys_config)
-    vm_types          = keys(var.vm_configurations)
+    total_vms          = length(var.vm_configurations)
+    total_images       = length(var.images_config)
+    total_flavors      = length(var.flavors_config)
+    total_ssh_keys     = length(var.ssh_keys_config)
+    vm_types           = keys(var.vm_configurations)
     floating_ips_count = length(module.floating_ips.floating_ips_addresses)
   }
 }
@@ -54,19 +54,19 @@ output "vm_details" {
   description = "Détails complets des VMs"
   value = {
     for vm_name, config in var.vm_configurations : vm_name => {
-      name           = module.compute.instances_map[vm_name].name
-      id             = module.compute.instances_map[vm_name].id
-      private_ip     = module.compute.instances_map[vm_name].private_ip
-      floating_ip    = config.assign_floating_ip ? module.floating_ips.floating_ips_addresses[vm_name] : "none"
-      image_used     = config.image_key
-      flavor_used    = config.flavor_key
-      ssh_key_used   = config.ssh_key
-      volume_size    = config.volume_size
-      volume_id      = module.storage.volumes_map[vm_name].id
-      packages       = config.packages
-      services       = config.services
-      custom_ports   = config.custom_ports
-      ssh_command    = config.assign_floating_ip ? "ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.floating_ips.floating_ips_addresses[vm_name]}" : "ssh via private network only"
+      name         = module.compute.instances_map[vm_name].name
+      id           = module.compute.instances_map[vm_name].id
+      private_ip   = module.compute.instances_map[vm_name].private_ip
+      floating_ip  = config.assign_floating_ip ? module.floating_ips.floating_ips_addresses[vm_name] : "none"
+      image_used   = config.image_key
+      flavor_used  = config.flavor_key
+      ssh_key_used = config.ssh_key
+      volume_size  = config.volume_size
+      volume_id    = module.storage.volumes_map[vm_name].id
+      packages     = config.packages
+      services     = config.services
+      custom_ports = config.custom_ports
+      ssh_command  = config.assign_floating_ip ? "ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.floating_ips.floating_ips_addresses[vm_name]}" : "ssh via private network only"
     }
   }
 }
@@ -84,9 +84,9 @@ output "ssh_connection_commands" {
   description = "Commandes de connexion SSH pour chaque VM"
   value = {
     for vm_name, config in var.vm_configurations : vm_name => {
-      command = config.assign_floating_ip ? "ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.floating_ips.floating_ips_addresses[vm_name]}" : "Connection via private network: ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.compute.instances_map[vm_name].private_ip}"
+      command  = config.assign_floating_ip ? "ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.floating_ips.floating_ips_addresses[vm_name]}" : "Connection via private network: ssh -i ${var.project_name}-${var.environment}-${config.ssh_key}-key.pem ubuntu@${module.compute.instances_map[vm_name].private_ip}"
       key_file = "${var.project_name}-${var.environment}-${config.ssh_key}-key.pem"
-      ip_type = config.assign_floating_ip ? "floating" : "private"
+      ip_type  = config.assign_floating_ip ? "floating" : "private"
     }
   }
 }

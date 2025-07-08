@@ -20,5 +20,5 @@ output "flavors_ids" {
 
 output "flavors_details" {
   description = "Détails complets des flavors"
-  value = openstack_compute_flavor_v2.flavors
+  value       = openstack_compute_flavor_v2.flavors
 }

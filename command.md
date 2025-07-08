@@ -22,3 +22,25 @@ sudo dnf install terraform
 - valeur du paramètre default
 - intéractive (avec le prompt)
 
+
+## Test de validation de base
+
+- Validation syntaxique
+
+```bash
+terraform validate
+```
+
+- Fromatage du code
+```bash
+terraform fmt -check
+```
+
+## Variables d'environnement pour les logs
+- TF_LOG=TRACE (DEBUG, INFO, WARN, ERROR) (Log provider et core terraform)
+    - TF_LOG_PROVIDER=TRACE
+    - TF_LOG_CORE=DEBUG
+- TF_LOG_PATH=./terraform.log
+
+## Générer un graph de dépendances
+terraform graph | dot -Tpng > graph.png

@@ -11,16 +11,16 @@ variable "environment" {
 variable "vm_configurations" {
   description = "Configuration des VMs pour créer les volumes"
   type = map(object({
-    image_key           = string
-    flavor_key          = string
-    ssh_key             = string
-    volume_size         = number
-    volume_type         = string
-    assign_floating_ip  = bool
-    user_data_template  = string
-    packages            = list(string)
-    services            = list(string)
-    custom_ports        = list(number)
+    image_key          = string
+    flavor_key         = string
+    ssh_key            = string
+    volume_size        = number
+    volume_type        = string
+    assign_floating_ip = bool
+    user_data_template = string
+    packages           = list(string)
+    services           = list(string)
+    custom_ports       = list(number)
   }))
 }
 

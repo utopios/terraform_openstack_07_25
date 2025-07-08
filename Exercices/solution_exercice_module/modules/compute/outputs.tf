@@ -25,7 +25,7 @@ output "instances_private_ips" {
 
 output "instances_details" {
   description = "Détails complets des instances"
-  value = openstack_compute_instance_v2.instances
+  value       = openstack_compute_instance_v2.instances
 }
 
 output "volume_attachments" {
